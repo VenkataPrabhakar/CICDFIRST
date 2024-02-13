@@ -1,10 +1,16 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                checkout scm
             }
         }
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        // Add more stages as needed (e.g., deploy, publish)
     }
 }
